@@ -25,7 +25,7 @@ on:
       environment:
         description: 'Environment to run tests against'
         type: environment
-        required: true
+        required: false
 
 jobs:
   MyFirstJob:
@@ -41,3 +41,11 @@ jobs:
         run: |
           echo "The repository ${{ github.repository }} contains the following files:"
           tree
+
+      - run: |
+          echo "Homedrive: ${{ inputs.homedrive }}"
+          echo "Log level: ${{ inputs.logLevel }}"
+          echo "Tag source: ${{ inputs.tag }}"
+          echo "Environment ${{ inputs.environment }}"
+        name: Workflow Inputs
+        if: ${{ github.event_name == 'workflow_dispatch' }}
